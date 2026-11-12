@@ -78,63 +78,60 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Schema
-market_id: string
-date: date32[day]
-probability: double</code></pre>
+<pre><code>Rows after topic join: 2885 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 115
-Columns: 4
-$ group_slug     &lt;chr&gt; "us-politics", "politics-default", "donald-trump", "tru…
-$ group_name     &lt;chr&gt; "Us Politics", "Politics Default", "Donald Trump", "Tru…
-$ broad_category &lt;fct&gt; Politics, Politics, Politics, Politics, Politics, Polit…
-$ market_count   &lt;int&gt; 124, 113, 76, 76, 40, 19, 11, 11, 10, 6, 5, 83, 66, 62,…</code></pre>
+<pre><code>Original market rows: 800 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  group_slug       group_name       broad_category market_count
-  &lt;chr&gt;            &lt;chr&gt;            &lt;fct&gt;                 &lt;int&gt;
-1 us-politics      Us Politics      Politics                124
-2 politics-default Politics Default Politics                113
-3 donald-trump     Donald Trump     Politics                 76</code></pre>
+<pre><code># A tibble: 5 × 2
+  horizon           mean_error
+  &lt;ord&gt;                  &lt;dbl&gt;
+1 More than 90 days     0.399 
+2 30-90 days            0.311 
+3 7-30 days             0.279 
+4 1-7 days              0.180 
+5 Final day             0.0896</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows in groups: 115 </code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 2,820
-Columns: 2
-$ market_id  &lt;chr&gt; "5dA0gu6syy", "5dA0gu6syy", "5dA0gu6syy", "LppqdEh6NP", "Lp…
-$ group_slug &lt;chr&gt; "ai", "technical-ai-timelines", "technology-default", "tech…</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  market_id  group_slug            
-  &lt;chr&gt;      &lt;chr&gt;                 
-1 5dA0gu6syy ai                    
-2 5dA0gu6syy technical-ai-timelines
-3 5dA0gu6syy technology-default    </code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows in market_groups: 2820 </code></pre>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  market_id  group_slugs                                                        
-  &lt;chr&gt;      &lt;chr&gt;                                                              
-1 5dA0gu6syy ai;technical-ai-timelines;technology-default                       
-2 LppqdEh6NP technology-default;business;us-politics;economics-default;politics…
-3 Z9shOszgAS technology-default;business;politics-default;economics-default;us-…</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows in joined: 43694 </code></pre>
 </div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  mean_absolute_error median_absolute_error
-                &lt;dbl&gt;                 &lt;dbl&gt;
-1               0.289                 0.239</code></pre>
+<pre><code># A tibble: 10 × 4
+   probability_bin predicted_probability actual_rate     n
+   &lt;ord&gt;                           &lt;dbl&gt;       &lt;dbl&gt; &lt;int&gt;
+ 1 0%-10%                           0.05     0.00943   424
+ 2 10%-20%                          0.15     0.0714     28
+ 3 20%-30%                          0.25     0.238      21
+ 4 30%-40%                          0.35     0.0526     19
+ 5 40%-50%                          0.45     0.5        18
+ 6 50%-60%                          0.55     0.684      19
+ 7 60%-70%                          0.65     0.619      21
+ 8 70%-80%                          0.75     0.818      11
+ 9 80%-90%                          0.85     1          17
+10 90%-100%                         0.95     0.995     222</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
