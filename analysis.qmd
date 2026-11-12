@@ -10,3 +10,37 @@ execute:
 library(tidyverse)
 library(arrow)
 ```
+
+```{r}
+print(open_dataset("data/history.parquet")$schema)
+
+markets <- read_parquet("data/markets.parquet")
+groups <- read_parquet("data/groups.parquet")
+market_groups <- read_parquet("data/market_groups.parquet")
+history <- read_parquet("data/history.parquet")
+
+glimpse(groups)
+print(head(groups, 3))
+cat("Rows in groups:", nrow(groups), "\n")
+
+glimpse(market_groups)
+print(head(market_groups, 3))
+cat("Rows in market_groups:", nrow(market_groups), "\n")
+
+print(head(markets |> select(market_id, group_slugs), 3))
+
+joined <- history |>
+  left_join(markets |> select(market_id, outcome), by = "market_id") |>
+  mutate(
+    outcome_numeric = if_else(outcome == "YES", 1, 0),
+    absolute_error = abs(probability - outcome_numeric)
+  )
+
+cat("Rows in joined:", nrow(joined), "\n")
+
+joined |>
+  summarise(
+    mean_absolute_error = mean(absolute_error),
+    median_absolute_error = median(absolute_error)
+  )
+```
